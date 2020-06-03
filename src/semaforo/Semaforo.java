@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package semaforo;
 
 /**
  *
- * @author bruno
+ * @author Bruno Ribeiro Tiago Rebelo
  */
 public class Semaforo {
 
@@ -15,7 +10,34 @@ public class Semaforo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        run();
+
+    }
+
+    private static void iniciaJogo() {
+        System.out.println("Jogo iniciado");
+    }
+
+    private static void menu() {
+        System.out.println("===========Semáforo========================\n");
+        System.out.println("***********1- Iniciar Jogo*****************");
+        System.out.println("***********0- Sair        *****************\n\n\n");
+        System.out.println("===========================================");
+        System.out.println("***********Digite uma opção do menu********");
     }
     
+    private static void run(){
+        int opcoesMenu = -1;
+        
+        menu();
+        opcoesMenu = Le.umInt();
+        switch (opcoesMenu) {
+            case 0:
+                return;
+            case 1:
+                iniciaJogo();
+        }
+    }
+
 }
