@@ -1,18 +1,18 @@
 package semaforo;
 
-/**
- *
- * @author bruno
- */
 public class Peca {
+    //atributos
     private int id;
     private String cor;
     
+    //construtor da Peça
     public Peca(){
         this.id = 0;
         this.cor = "Verde";
     }
 
+    
+    //getters e setter e cada atributo
     public int getId() {
         return id;
     }
