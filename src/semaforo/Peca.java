@@ -3,12 +3,12 @@ package semaforo;
 public class Peca {
     //atributos
     private int id;
-    private String cor;
+    private CoresEnum cor;
     
     //construtor da Peça
-    public Peca(){
+    public Peca(CoresEnum cor){
         this.id = 0;
-        this.cor = "Verde";
+        this.cor = cor;
     }
 
     
@@ -21,11 +21,16 @@ public class Peca {
         this.id = id;
     }
 
-    public String getCor() {
+    public CoresEnum getCor() {
         return cor;
     }
 
-    public void setCor(String cor) {
+    public void setCor(CoresEnum cor) {
         this.cor = cor;
+    }
+
+    @Override
+    public String toString() {
+        return  this.cor.toString() ;
     }
 }

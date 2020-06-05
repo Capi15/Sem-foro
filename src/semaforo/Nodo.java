@@ -9,7 +9,7 @@ public class Nodo<T> implements Serializable {
     private Nodo<T> next;
 
     //o construtor da classe recebe qualquer tipo de dados e o seu respetivo nó
-    public Nodo(T dados, Nodo<T> next) {
+    public Nodo(T dados) {
         this.dados = dados;
         this.next = next;
     }

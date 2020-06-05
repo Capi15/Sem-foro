@@ -8,6 +8,7 @@ public class ListaLigada<T> implements Serializable {
     //atributos da lista
     private Nodo<T> cabeca;
     private int size;
+    private String mostraDados;
 
     //construtor da ListaLigada
     public ListaLigada() {
@@ -26,11 +27,13 @@ public class ListaLigada<T> implements Serializable {
         //caso a lista esteja vazia
         if (isEmpty()) {
             noTemporario = new Nodo<T>(dados);
+            this.mostraDados = dados.toString();
             this.cabeca = noTemporario; // o nó é a propria cabeça da lista
             this.size += 1; //aumenta o tamanho da lista
             return this; //retorna a lista
         } else if (!this.isEmpty()) { // se a lista já tiver elementos | são adicionados os elementos no incio da lista
             noTemporario = new Nodo<T>(dados);
+            this.mostraDados = dados.toString();
             this.size += 1; // aumenta o tamanho da lista conforme os nós que vão ser inseridos
             return this; // retorna a lista
         }
@@ -76,4 +79,11 @@ public class ListaLigada<T> implements Serializable {
     public int size() {
         return this.size;
     }
+
+    @Override
+    public String toString() {
+        return mostraDados; 
+    }
+    
+    
 }
