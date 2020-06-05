@@ -3,9 +3,10 @@ package semaforo;
 import java.util.HashSet;
 
 /**
- *
- * @authors Bruno Ribeiro nº21514 Tiago Rebelo nº20537
+ * @authors Bruno Ribeiro nº21514 
+ * @authors Tiago Rebelo nº20537
  */
+
 public class Semaforo {
 
     //atributos da classe
@@ -13,6 +14,8 @@ public class Semaforo {
     private static Jogador jogador2;
     private static int count = 0;
     private static int opcoesMenu = -1;
+    private static int linha, coluna;
+    private static boolean validado = false;
 
     /**
      * @param args the command line arguments
@@ -23,46 +26,54 @@ public class Semaforo {
 
     //método responsável pelo inicio de um jogo
     private static void iniciaJogo() {
-        int opcoesJogo = -1;//as opçoes disponiveis nos jogo são criadas aqui
-        int linha = -1;
-        int coluna = -1;
+        int continuar;
+        boolean opcoesJogo = false;//as opçoes disponiveis nos jogo são criadas aqui
+        
         System.out.println("Jogo iniciado");
         // instanciação de um Tabuleiro
-        Tabuleiro tabuleiro = new Tabuleiro();
-        tabuleiro.mostraTabuleiro();
-
-        while (opcoesJogo != 0 || linha <= 0 || linha > 3 || coluna <= 0 || coluna > 4) {
-
+        Tabuleiro tabu = new Tabuleiro();
+        tabu.inserePecas();
+        
+        while (opcoesJogo == false) {
             count++; // esta variavel é atualizada a cada jogada, permite saber o numero de jogadas total num jogo
-            if (count % 2 == 0) {//permite distinguir as jogadas de cada jogador
-                System.out.printf("Jogador(a) " + jogador1.getNome() + " é a sua vez de jogar\n");
-
-            } else {
+            if (count % 2 == 0) {//permite distinguir as jogadas de cada jogador. caso seja par ou impar
                 System.out.printf("Jogador(a) " + jogador2.getNome() + " é a sua vez de jogar\n");
-
+            } else {
+                System.out.printf("Jogador(a) " + jogador1.getNome() + " é a sua vez de jogar\n");
             }
-            System.out.println("Caso pretenda desistir precione 0, caso contrario precione 1\n");
-            opcoesJogo = Le.umInt();
-            switch (opcoesJogo) {
+            System.out.println("Caso pretenda desistir escreva 0, caso contrario precione 1\n");
+            continuar = Le.umInt();
+            switch (continuar) {
                 case 0:
                     if (count % 2 == 0) { //permite determinar qual o jogador vencedor caso algum dos jogadores desista
-                        System.out.printf("\n\nO(A) Jogador(a) " + jogador2.getNome() + " Venceu!!!\n\n\n\n");
-                    } else {
                         System.out.printf("\n\nO(A) Jogador(a) " + jogador1.getNome() + " Venceu!!!\n\n\n\n");
+                        count=0;
+                    } else {
+                        System.out.printf("\n\nO(A) Jogador(a) " + jogador2.getNome() + " Venceu!!!\n\n\n\n");
+                        count=0;
                     }
                     return;
                 case 1:
-                    System.out.println("Escolha a linha onde pretende jogar:");
-                    linha = Le.umInt();
-                    System.out.println("Escolha a coluna onde pretende jogar:");
-                    coluna = Le.umInt();
-                    tabuleiro.escolha(linha - 1, coluna - 1);
-                    tabuleiro.mostraTabuleiro();
-                    if (opcoesJogo == 0) {
+                    while(validado == false){
+                        System.out.println("Escolha a linha onde pretende jogar:");
+                        linha = Le.umInt();
+                        System.out.println("Escolha a coluna onde pretende jogar:");
+                        coluna = Le.umInt();
+                        if(linha < 3 && linha > 0 && coluna < 4 && coluna > 0){
+                            validado = true;
+                            }else{
+                                System.out.println("Os valores colocados são invalidos.\nPor favor verifique as coordenadas de cada casa no tabuleiro");
+                            }
+                        }
+                            tabu.escolha(linha, coluna);
+                            tabu.mostraTabuleiro();
+                        if (opcoesJogo == true) {
                         if (count % 2 == 0) { //permite determinar qual o jogador vencedor caso algum dos jogadores desista
                             System.out.printf("\n\nO(A) Jogador(a) " + jogador2.getNome() + " Venceu!!!\n\n\n\n");
+                            count=0;
                         } else {
                             System.out.printf("\n\nO(A) Jogador(a) " + jogador1.getNome() + " Venceu!!!\n\n\n\n");
+                            count=0;
                         }
                     }
                     break;
@@ -75,8 +86,6 @@ public class Semaforo {
         count = 0; // a variável de contador volta ao inicio
         run(); // volta a reiniciar o jogo
     }
-    
-    //public static void  
 
     //mostra o menu inicial
     private static void menu() {
@@ -116,4 +125,5 @@ public class Semaforo {
         jogador2 = new Jogador(j2);
     }
 
+    
 }

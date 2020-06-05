@@ -1,25 +1,18 @@
 package semaforo;
 
 /**
- *
- * @author bruno
+ * @authors Bruno Ribeiro nº21514 
+ * @authors Tiago Rebelo nº20537
  */
+
 public class Tabuleiro {
-
-    //atributos
     private final int totalPecas;
-    private final int pecasVerdes;
-    private final int pecasAmarelas;
-    private final int pecasVermelhas;
-    //private ListaLigada<Peca> casa[][] = new ListaLigada[3][4]; //criação do array bidimensional(matriz)
     private final ListaLigada<Peca> casa = new ListaLigada<>();
-
     //construtor da classe Tabuleiro
-    public Tabuleiro() {
-        this.totalPecas = 24;
-        this.pecasVerdes = this.pecasAmarelas = this.pecasVermelhas = 8;
-        inserePecas();
-    }
+    
+        public Tabuleiro() {
+            this.totalPecas = 24;
+        }
 
     //este método é responsável por imprimir o tabuleiro para o ecrã
     public String mostraTabuleiro() {
@@ -28,7 +21,7 @@ public class Tabuleiro {
             System.out.println("-----------------");
             //percorre o array por colunas
             for (int coluna = 0; coluna < 4; coluna++) {
-                System.out.printf("| " +  + " ");
+                System.out.printf("| " + mascara(procuraPeca(linha, coluna)) + " ");
             }
             System.out.println("|");
         }
@@ -39,34 +32,127 @@ public class Tabuleiro {
 
     public void inserePecas() {
         //percorre o array por linha
-        for (int linha = 0; linha < 3; linha++) {
+        for (int linha = 1; linha <= 3; linha++) {
             //percorre o array por colunas
-            for (int coluna = 0; coluna < 4; coluna++) {
-                casa.Push(new Peca(null, linha, coluna));
+            for (int coluna = 1; coluna <= 4; coluna++) {
+                casa.Push(new Peca(Cor.NONE, linha, coluna));
             }
         }
     }
 
     public Peca procuraPeca(int linha, int coluna){
-         
-    }
-
-public void escolha(int li, int co) {
-        ListaLigada<Peca> listaPecas = new ListaLigada<>();
-        casa[li][co] = listaPecas.Push(new Peca(CoresEnum.VERDE)).toString();
-//        if (casa[li][co] == listaPecas.Push(new Peca(CoresEnum.VERDE)).toString()) {
-//            casa[li][co] = listaPecas.Push(new Peca(CoresEnum.AMARELO)).toString();
-//        } else {
-//            return;
-//        }
-//
-//        if (casa[li][co] == listaPecas.Push(new Peca(CoresEnum.AMARELO)).toString()) {
-//            casa[li][co] = listaPecas.Push(new Peca(CoresEnum.VERMELHO)).toString();
-//        }else{
-//           return;
-//        } 
-
+        Nodo aux= casa.getHead();
+        while(aux!= null) {
+            if(((Peca)aux.getDados()).getX()== coluna && ((Peca)aux.getDados()).getY()== linha )
+                return ((Peca)aux.getDados());
+            aux= aux.getNext();
+        }
+        return null;
     }
     
-    public void criaLista
+    public String mascara(Peca x){
+        if("NONE".equals(x.toString())){
+                return "        ";
+        }else{
+            return x.getCor().toString();
+        }
+    }
+
+    public void escolha(int li, int co) {
+        Peca x = procuraPeca(li,co); //converte o x numa peça para simplificar
+        if(x.getCor().equals(Cor.NONE)){
+            x.setCor(Cor.VERDE);
+        }else if(x.getCor().equals(Cor.VERDE)){
+            x.setCor(Cor.AMARELO);
+        }else if(x.getCor().equals(Cor.AMARELO)){
+            x.setCor(Cor.VERMELHO);
+        }
+        }
+    
+    public boolean vizHorizontal(int li, int co){
+        Peca x = procuraPeca(li,co);
+        if(co==1){
+            Peca x2 = procuraPeca(li,co+1);
+            Peca x3 = procuraPeca(li,co+2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }else if(co==2 || co==3){
+            Peca x2 = procuraPeca(li,co-1);
+            Peca x3 = procuraPeca(li,co+1);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }else if(co==4){
+            Peca x2 = procuraPeca(li,co-1);
+            Peca x3 = procuraPeca(li,co-2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }
+        System.out.println("teste VH Falso\n");
+        return false;
+    }
+    
+    public boolean vizVertical(int li, int co){
+        Peca x = procuraPeca(li,co);
+        if(li==1){
+            Peca x2 = procuraPeca(li+1,co);
+            Peca x3 = procuraPeca(li+2,co);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }
+        if(li==2){
+            Peca x2 = procuraPeca(li-1,co);
+            Peca x3 = procuraPeca(li+1,co);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }
+        if(li==3){
+            Peca x2 = procuraPeca(li-1,co);
+            Peca x3 = procuraPeca(li-2,co);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }
+        System.out.println("teste VV Falso\n");
+        return false;
+    }
+    
+    public boolean vizDiagonal(int li, int co){
+        Peca x = procuraPeca(li,co);
+        if(co==1 && li==1){
+            Peca x2 = procuraPeca(li+1,co+1);
+            Peca x3 = procuraPeca(li+2,co+2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }else if(co==4 && li==1){
+            Peca x2 = procuraPeca(li+1,co-1);
+            Peca x3 = procuraPeca(li+2,co-2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }else if(co==1 && li==3){
+            Peca x2 = procuraPeca(li-1,co+1);
+            Peca x3 = procuraPeca(li-2,co+2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }else if(co==4 && li==3){
+            Peca x2 = procuraPeca(li-1,co-1);
+            Peca x3 = procuraPeca(li-2,co-2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }
+        if(co>1 && co<4 && li< ){
+            Peca x2 = procuraPeca(li+1,co+1);
+            Peca x3 = procuraPeca(li+2,co+2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+                /*x
+                |
+                |
+                |
+                //se eu nao acordar de manha....
+                //falta fazer o resto da validação bruno.
+                //estes metodos são para validação das casas vizinhas e se as peças forem iguais ele retorna true
+                //depois so precisamos de invocar a validação e terminar o jogo.
+                // puff trabalho feito*/
+        }
+        return false;
+        }
 }

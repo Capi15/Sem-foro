@@ -1,31 +1,35 @@
 package semaforo;
 
+/**
+ * @authors Bruno Ribeiro nº21514 
+ * @authors Tiago Rebelo nº20537
+ */
+
 public class Peca {
     //atributos
-    private CoresEnum cor;
+    private Cor cor;
     private int x;
     private int y;
     
     //construtor da Peça
-    public Peca(CoresEnum cor, int x, int y){
+    public Peca(Cor cor, int x, int y){
         this.cor = cor;
         this.x = x;
         this.y = y;
     }
 
-    
     //getters e setter e cada atributo
-    public CoresEnum getCor() {
+    public Cor getCor() {
         return cor;
     }
 
-    public void setCor(CoresEnum cor) {
+    public void setCor(Cor cor) {
         this.cor = cor;
     }
 
     @Override
     public String toString() {
-        return  this.cor.toString() ;
+        return cor.toString();
     }
 
     public int getX() {

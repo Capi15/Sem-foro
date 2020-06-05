@@ -1,5 +1,10 @@
 package semaforo;
 
+/**
+ * @authors Bruno Ribeiro nº21514 
+ * @authors Tiago Rebelo nº20537
+ */
+
 import java.io.Serializable;
 
 // Classe genérica de nós, permite receber diversos objetos

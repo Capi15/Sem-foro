@@ -1,5 +1,10 @@
 package semaforo;
 
+/**
+ * @authors Bruno Ribeiro nº21514 
+ * @authors Tiago Rebelo nº20537
+ */
+
 import java.io.Serializable;
 
 //lista ligada que aceita vários tipos de objetos
