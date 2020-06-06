@@ -51,7 +51,7 @@ public class Tabuleiro {
     }
     
     public String mascara(Peca x){
-        if("NONE".equals(x.toString())){
+        if("NONE".equals(x.toString()) || x == null){
                 return "        ";
         }else{
             return x.getCor().toString();
@@ -122,6 +122,16 @@ public class Tabuleiro {
             Peca x3 = procuraPeca(li+2,co+2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
                     return true;
+        }else if(co==2 && li==1){
+            Peca x2 = procuraPeca(li+1,co+1);
+            Peca x3 = procuraPeca(li+2,co+2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }else if(co==3 && li==1){
+            Peca x2 = procuraPeca(li+1,co-1);
+            Peca x3 = procuraPeca(li+2,co-2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
         }else if(co==4 && li==1){
             Peca x2 = procuraPeca(li+1,co-1);
             Peca x3 = procuraPeca(li+2,co-2);
@@ -132,27 +142,37 @@ public class Tabuleiro {
             Peca x3 = procuraPeca(li-2,co+2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
                     return true;
+        }else if(co==2 && li==3){
+            Peca x2 = procuraPeca(li-1,co+1);
+            Peca x3 = procuraPeca(li-2,co+2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
+        }else if(co==3 && li==3){
+            Peca x2 = procuraPeca(li-1,co-1);
+            Peca x3 = procuraPeca(li-2,co-2);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+                    return true;
         }else if(co==4 && li==3){
             Peca x2 = procuraPeca(li-1,co-1);
             Peca x3 = procuraPeca(li-2,co-2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
                     return true;
-        }
-        if(co>1 && co<4 && li< ){
-            Peca x2 = procuraPeca(li+1,co+1);
-            Peca x3 = procuraPeca(li+2,co+2);
-                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
+        }else if(co==2 && li==2){
+            Peca x2 = procuraPeca(li-1,co-1);
+            Peca x3 = procuraPeca(li+1,co+1);
+            Peca x4 = procuraPeca(li-1,co+1);
+            Peca x5 = procuraPeca(li+1,co-1);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()) || x4.getCor().equals(x.getCor()) && x5.getCor().equals(x.getCor()))
                     return true;
-                /*x
-                |
-                |
-                |
-                //se eu nao acordar de manha....
-                //falta fazer o resto da validação bruno.
-                //estes metodos são para validação das casas vizinhas e se as peças forem iguais ele retorna true
-                //depois so precisamos de invocar a validação e terminar o jogo.
-                // puff trabalho feito*/
+        }else if(co==3 && li==2){
+            Peca x2 = procuraPeca(li-1,co-1);
+            Peca x3 = procuraPeca(li+1,co+1);
+            Peca x4 = procuraPeca(li-1,co+1);
+            Peca x5 = procuraPeca(li+1,co-1);
+                if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()) || x4.getCor().equals(x.getCor()) && x5.getCor().equals(x.getCor()))
+                    return true;
         }
         return false;
         }
 }
+
