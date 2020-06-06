@@ -33,6 +33,7 @@ public class Semaforo {
         // instanciação de um Tabuleiro
         Tabuleiro tabu = new Tabuleiro();
         tabu.inserePecas();
+        tabu.mostraTabuleiro();
         
         while (opcoesJogo == false) {
             count++; // esta variavel é atualizada a cada jogada, permite saber o numero de jogadas total num jogo
@@ -66,7 +67,7 @@ public class Semaforo {
                             }
                         }
                             tabu.escolha(linha, coluna);
-                            tabu.mostraTabuleiro();
+                            opcoesJogo = tabu.jogada(linha, coluna);
                         if (opcoesJogo == true) {
                         if (count % 2 == 0) { //permite determinar qual o jogador vencedor caso algum dos jogadores desista
                             System.out.printf("\n\nO(A) Jogador(a) " + jogador2.getNome() + " Venceu!!!\n\n\n\n");

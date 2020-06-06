@@ -29,7 +29,7 @@ public class Peca {
 
     @Override
     public String toString() {
-        return cor.toString();
+        return getCor().toString()+" " + getX()+ " " + getY();
     }
 
     public int getX() {
