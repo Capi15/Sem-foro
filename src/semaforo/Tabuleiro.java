@@ -18,14 +18,14 @@ public class Tabuleiro {
     public String mostraTabuleiro() {
         //percorre o array por linha
         for (int linha = 1; linha <= 3; linha++) {
-            System.out.println("-----------------");
+            System.out.println("+----------+----------+----------+----------+");
             //percorre o array por colunas
             for (int coluna = 1; coluna <= 4; coluna++) {
-                System.out.printf("| " + procuraPeca(linha, coluna) + " ");
+                System.out.printf("|" + mascara(procuraPeca(linha, coluna)) + "");
             }
             System.out.println("|");
         }
-        System.out.println("-----------------");
+        System.out.println("+----------+----------+----------+----------+");
         //não há retorno, portanto é retornado null
         return null;
     }
@@ -37,7 +37,6 @@ public class Tabuleiro {
             for (int coluna = 1; coluna <= 4; coluna++) {
                 //System.out.println("teste inserePecas");
                 casa.addNodo(new Peca(Cor.NONE, linha, coluna));
-                //System.out.println(casa);
             }
         }
     }
@@ -46,7 +45,7 @@ public class Tabuleiro {
         Nodo aux = casa.getHead();
         while(aux!= null) {
             //System.out.println((Peca)aux.getDados());
-            if(((Peca)aux.getDados()).getX()== coluna && ((Peca)aux.getDados()).getY()== linha ){
+            if(((Peca)aux.getDados()).getX()== linha && ((Peca)aux.getDados()).getY()== coluna ){
                 return ((Peca)aux.getDados());
             }
             aux = aux.getNext();
@@ -55,11 +54,27 @@ public class Tabuleiro {
     }
     
     public String mascara(Peca x){
-        if(x.getCor().equals(Cor.NONE)){
+        switch (x.getCor()) {
+                case NONE:
+                    return "          ";
+                case VERDE:
+                    return"  "+ x.toString()+"   ";
+                case AMARELO:
+                    return" "+ x.toString()+"  ";
+                case VERMELHO:
+                    return" "+ x.toString()+" ";   
+        /*if(x.getCor().equals(Cor.NONE)){
                 return "        ";
-        }else{
-            return x.getCor().toString();
+        }else if(x.getCor().equals(Cor.VERDE)){
+            return "  "+ x.toString()+"  ";
+        }else if(x.getCor().equals(Cor.AMARELO)){
+            return " "+ x.toString()+" ";
+        }else if(x.getCor().equals(Cor.VERMELHO)){
+            return x.toString();
         }
+        return "        ";*/
+    }
+        return "";
     }
 
     //para verificar a peça e trocar a cor dela
@@ -82,7 +97,6 @@ public class Tabuleiro {
     
     //---- validação das jogadas-----
     public boolean vizHorizontal(int li, int co){
-        
         Peca x = procuraPeca(li,co);
         //System.out.println(x.getCor());
         //System.out.println(Cor.NONE);
@@ -105,7 +119,6 @@ public class Tabuleiro {
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
                     return true;
         }
-        System.out.println("teste VH Falso\n");
         return false;
     }
     
@@ -129,7 +142,6 @@ public class Tabuleiro {
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
                     return true;
         }
-        System.out.println("teste VV Falso\n");
         return false;
     }
     
@@ -190,10 +202,8 @@ public class Tabuleiro {
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()) || x4.getCor().equals(x.getCor()) && x5.getCor().equals(x.getCor()))
                     return true;
         }
-        System.out.println("teste VD Falso\n");
         return false;
         }
-
     //--------------------------------
     
     public boolean jogada(int li, int co){
