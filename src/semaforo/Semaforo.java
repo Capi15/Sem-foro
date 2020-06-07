@@ -34,7 +34,6 @@ public class Semaforo {
         Tabuleiro tabu = new Tabuleiro();
         tabu.inserePecas();
         tabu.mostraTabuleiro();
-        
         while (opcoesJogo == false) {
             count++; // esta variavel é atualizada a cada jogada, permite saber o numero de jogadas total num jogo
             if (count % 2 == 0) {//permite distinguir as jogadas de cada jogador. caso seja par ou impar
@@ -60,22 +59,25 @@ public class Semaforo {
                         linha = Le.umInt();
                         System.out.println("Escolha a coluna onde pretende jogar:");
                         coluna = Le.umInt();
-                        if(linha < 3 && linha > 0 && coluna < 4 && coluna > 0){
+                        if(linha <= 3 && linha > 0 && coluna <= 4 && coluna > 0){
                             validado = true;
+                            tabu.escolha(linha, coluna);
+                            tabu.mostraTabuleiro();
+                            opcoesJogo = tabu.jogada(linha, coluna);
                             }else{
                                 System.out.println("Os valores colocados são invalidos.\nPor favor verifique as coordenadas de cada casa no tabuleiro");
                             }
+                        
                         }
-                            tabu.escolha(linha, coluna);
-                            opcoesJogo = tabu.jogada(linha, coluna);
+                        validado = false;
                         if (opcoesJogo == true) {
-                        if (count % 2 == 0) { //permite determinar qual o jogador vencedor caso algum dos jogadores desista
-                            System.out.printf("\n\nO(A) Jogador(a) " + jogador2.getNome() + " Venceu!!!\n\n\n\n");
-                            count=0;
-                        } else {
-                            System.out.printf("\n\nO(A) Jogador(a) " + jogador1.getNome() + " Venceu!!!\n\n\n\n");
-                            count=0;
-                        }
+                            if (count % 2 == 0) { //permite determinar qual o jogador vencedor caso algum dos jogadores desista
+                                System.out.printf("\n\nO(A) Jogador(a) " + jogador2.getNome() + " Venceu!!!\n\n\n\n");
+                                count=0;
+                            } else {
+                                System.out.printf("\n\nO(A) Jogador(a) " + jogador1.getNome() + " Venceu!!!\n\n\n\n");
+                                count=0;
+                            }
                     }
                     break;
                 default:

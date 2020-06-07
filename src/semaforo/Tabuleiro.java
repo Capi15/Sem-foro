@@ -7,7 +7,7 @@ package semaforo;
 
 public class Tabuleiro {
     private final int totalPecas;
-    private final ListaLigada<Peca> casa = new ListaLigada<>();
+    private final ListaLigada casa = new ListaLigada();
     //construtor da classe Tabuleiro
     
         public Tabuleiro() {
@@ -35,8 +35,9 @@ public class Tabuleiro {
         for (int linha = 1; linha <= 3; linha++) {
             //percorre o array por colunas
             for (int coluna = 1; coluna <= 4; coluna++) {
-                casa.Push(new Peca(Cor.NONE, linha, coluna));
-                System.out.println(casa);
+                //System.out.println("teste inserePecas");
+                casa.addNodo(new Peca(Cor.NONE, linha, coluna));
+                //System.out.println(casa);
             }
         }
     }
@@ -44,10 +45,11 @@ public class Tabuleiro {
     public Peca procuraPeca(int linha, int coluna){
         Nodo aux = casa.getHead();
         while(aux!= null) {
+            //System.out.println((Peca)aux.getDados());
             if(((Peca)aux.getDados()).getX()== coluna && ((Peca)aux.getDados()).getY()== linha ){
                 return ((Peca)aux.getDados());
             }
-            aux= aux.getNext();
+            aux = aux.getNext();
         }
         return null;
     }
@@ -82,14 +84,14 @@ public class Tabuleiro {
     public boolean vizHorizontal(int li, int co){
         
         Peca x = procuraPeca(li,co);
-        System.out.println(x.getCor());
-        System.out.println(Cor.NONE);
-        System.out.println(x);
+        //System.out.println(x.getCor());
+        //System.out.println(Cor.NONE);
+        //System.out.println(x);
         if(co==1){
             Peca x2 = procuraPeca(li,co+1);
-            System.out.println(x2);
+            //System.out.println(x2);
             Peca x3 = procuraPeca(li,co+2);
-            System.out.println(x3);
+            //System.out.println(x3);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()))
                     return true;
         }else if(co==2 || co==3){
