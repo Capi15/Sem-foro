@@ -8,6 +8,7 @@ package semaforo;
 public class Tabuleiro {
     private final int totalPecas;
     private final ListaLigada casa = new ListaLigada();
+    private boolean ePossivel = true;
     //construtor da classe Tabuleiro
     
         public Tabuleiro() {
@@ -91,6 +92,7 @@ public class Tabuleiro {
                 x.setCor(Cor.VERMELHO);
                 break;
             default:
+                ePossivel = false;
                 break;
         }
         }
@@ -205,11 +207,20 @@ public class Tabuleiro {
         return false;
         }
     //--------------------------------
-    
+
     public boolean jogada(int li, int co){
         if(vizHorizontal(li, co) || vizVertical(li, co) || vizDiagonal(li, co)){
             return true;
         }
             return false;
     }
+
+    public boolean getEPossivel(){
+        return this.ePossivel;
+    }
+
+    public void setEPossivel(boolean ePossivel){
+        this.ePossivel = ePossivel;
+    }
+
 }
