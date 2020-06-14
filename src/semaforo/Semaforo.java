@@ -17,9 +17,6 @@ public class Semaforo {
     private static int linha, coluna;
     private static boolean validado = false;
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         run(); //chama o método que vai dar inicio ao jogo
     }
@@ -132,6 +129,4 @@ public class Semaforo {
         jogador1 = new Jogador(j1);
         jogador2 = new Jogador(j2);
     }
-
-    
 }

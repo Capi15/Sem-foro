@@ -59,6 +59,4 @@ public class ListaLigada {
     public String toString() {
         return mostraDados; 
     }
-    
-    
 }

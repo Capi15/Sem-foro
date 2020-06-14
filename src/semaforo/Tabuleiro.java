@@ -8,7 +8,6 @@ package semaforo;
 public class Tabuleiro {
     private int pG, pY, pR; //peças  -  pg -> Verde / pY -> Amarela / pR -> Vermelha
     private final ListaLigada casa = new ListaLigada();
-    private boolean ePossivel = true;
     //construtor da classe Tabuleiro
     
         public Tabuleiro() {
@@ -86,19 +85,15 @@ public class Tabuleiro {
         switch (x.getCor()) {
             case NONE:
                 pG--;
-                System.out.println("troca para verde");
                 if(pG<=0){
-                    System.out.println("teste - pG");
                     return false;
                 }else{
                     x.setCor(Cor.VERDE);
                     return true;
                 }
             case VERDE:
-                System.out.println("troca para amarelo");
                 pY--;
                 if(pY<=0){
-                    System.out.println("teste -pY");
                     return false;
                 }else{
                     x.setCor(Cor.AMARELO);
@@ -107,13 +102,10 @@ public class Tabuleiro {
                 }
             case AMARELO:
                 pR--;
-                System.out.println("troca para vermelho");
                 if(pR<=0){
-                    System.out.println("teste -pR");
                     pY++;
                     return false;
                 }else{
-                    
                     x.setCor(Cor.VERMELHO);
                     return true;
                 }
@@ -132,7 +124,7 @@ public class Tabuleiro {
             Peca x3 = procuraPeca(li,co+2);
             System.out.println(x3.getCor());
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("h1");
+                    System.out.println("Jogada horizontal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==2){
@@ -142,10 +134,10 @@ public class Tabuleiro {
             System.out.println(x3.getCor());
             Peca x4 = procuraPeca(li, co+2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("h2");
+                    System.out.println("Jogada horizontal.\n Peça: " + x.getCor());
                     return true;
                 }else if(x3.getCor().equals(x.getCor()) && x4.getCor().equals(x.getCor())){
-                    System.out.println("h2-1");
+                    System.out.println("Jogada horizontal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==3){
@@ -155,10 +147,10 @@ public class Tabuleiro {
             System.out.println(x3.getCor());
             Peca x4 = procuraPeca(li, co-2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("h3");
+                    System.out.println("Jogada horizontal.\n Peça: " + x.getCor());
                     return true;
                 }else if(x2.getCor().equals(x.getCor()) && x4.getCor().equals(x.getCor())){
-                    System.out.println("h3-1");
+                    System.out.println("Jogada horizontal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==4){
@@ -167,11 +159,10 @@ public class Tabuleiro {
             Peca x3 = procuraPeca(li,co-2);
             System.out.println(x3.getCor());
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("h4");
+                    System.out.println("Jogada horizontal.\n Peça: " + x.getCor());
                     return true;
         }
         }
-        System.out.println("h5");
         return false;
     }
     
@@ -181,7 +172,7 @@ public class Tabuleiro {
             Peca x2 = procuraPeca(li+1,co);
             Peca x3 = procuraPeca(li+2,co);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("v1");
+                    System.out.println("Jogada Vertical.\n Peça: " + x.getCor());
                     return true;
                 }
         }
@@ -189,7 +180,7 @@ public class Tabuleiro {
             Peca x2 = procuraPeca(li-1,co);
             Peca x3 = procuraPeca(li+1,co);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("v2");
+                    System.out.println("Jogada Vertical.\n Peça: " + x.getCor());
                     return true;
                 }
         }
@@ -197,11 +188,10 @@ public class Tabuleiro {
             Peca x2 = procuraPeca(li-1,co);
             Peca x3 = procuraPeca(li-2,co);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("v3");
+                    System.out.println("Jogada Vertical.\n Peça: " + x.getCor());
                     return true;
                 }
         }
-        System.out.println("v4");
         return false;
     }
     
@@ -211,56 +201,56 @@ public class Tabuleiro {
             Peca x2 = procuraPeca(li+1,co+1);
             Peca x3 = procuraPeca(li+2,co+2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("d1");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==2 && li==1){
             Peca x2 = procuraPeca(li+1,co+1);
             Peca x3 = procuraPeca(li+2,co+2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("d2");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==3 && li==1){
             Peca x2 = procuraPeca(li+1,co-1);
             Peca x3 = procuraPeca(li+2,co-2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("d3");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==4 && li==1){
             Peca x2 = procuraPeca(li+1,co-1);
             Peca x3 = procuraPeca(li+2,co-2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("d4");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==1 && li==3){
             Peca x2 = procuraPeca(li-1,co+1);
             Peca x3 = procuraPeca(li-2,co+2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("d5");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==2 && li==3){
             Peca x2 = procuraPeca(li-1,co+1);
             Peca x3 = procuraPeca(li-2,co+2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("d6");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==3 && li==3){
             Peca x2 = procuraPeca(li-1,co-1);
             Peca x3 = procuraPeca(li-2,co-2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("d7");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==4 && li==3){
             Peca x2 = procuraPeca(li-1,co-1);
             Peca x3 = procuraPeca(li-2,co-2);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor())){
-                    System.out.println("d8");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==2 && li==2){
@@ -269,7 +259,7 @@ public class Tabuleiro {
             Peca x4 = procuraPeca(li-1,co+1);
             Peca x5 = procuraPeca(li+1,co-1);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()) || x4.getCor().equals(x.getCor()) && x5.getCor().equals(x.getCor())){
-                    System.out.println("d9");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }else if(co==3 && li==2){
@@ -278,54 +268,31 @@ public class Tabuleiro {
             Peca x4 = procuraPeca(li-1,co+1);
             Peca x5 = procuraPeca(li+1,co-1);
                 if(x2.getCor().equals(x.getCor()) && x3.getCor().equals(x.getCor()) || x4.getCor().equals(x.getCor()) && x5.getCor().equals(x.getCor())){
-                    System.out.println("d10");
+                    System.out.println("Jogada Diagonal.\n Peça: " + x.getCor());
                     return true;
                 }
         }
-        System.out.println("d11");
         return false;
         }
-    //--------------------------------
+       //--------------------------------
 
     public boolean jogada(int li, int co){
         boolean teste;
         teste = vizHorizontal(li, co);
         if(teste==false){
-            System.out.println("vizHorizontal falso");
             teste= vizVertical(li, co);
             if(teste == false){
-                System.out.println("vizVertical false");
                 teste= vizDiagonal(li, co);
                 if(teste==false){
-                    System.out.println("vizDiagonal false");
                 }else{
-                System.out.println("vizDiagonal verdadeiro");
                 return true;
             }
             }else{
-                System.out.println("vizVertical verdadeiro");
                 return true;
             }
         }else{
-            System.out.println("vizHorizontal verdadeiro");
             return true;
         }
         return false;
     }
-    
-    public void limitePeca(){
-        
-    
-    }
-
-    public boolean getEPossivel(){
-        return ePossivel;
-    }
-
-    public void setEPossivel(boolean ePossivel){
-        this.ePossivel = ePossivel;
-    }
-    
-    
-
 }
