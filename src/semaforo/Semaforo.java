@@ -60,10 +60,15 @@ public class Semaforo {
                         System.out.println("Escolha a coluna onde pretende jogar:");
                         coluna = Le.umInt();
                         if(linha <= 3 && linha > 0 && coluna <= 4 && coluna > 0){
-                            validado = true;
-                            tabu.escolha(linha, coluna);
-                            tabu.mostraTabuleiro();
-                            opcoesJogo = tabu.jogada(linha, coluna);
+                                if(tabu.escolha(linha, coluna)==false){
+                                    System.out.println("Não é possível alterar a peça vermelha. Regra de jogo.\n Por favor faça outra jogada");
+                                }else{
+                                    tabu.mostraTabuleiro();
+                                    opcoesJogo = tabu.jogada(linha, coluna);
+                                    System.out.println(opcoesJogo);
+                                    validado = true;
+                                }
+                            
                             }else{
                                 System.out.println("Os valores colocados são invalidos.\nPor favor verifique as coordenadas de cada casa no tabuleiro");
                             }
